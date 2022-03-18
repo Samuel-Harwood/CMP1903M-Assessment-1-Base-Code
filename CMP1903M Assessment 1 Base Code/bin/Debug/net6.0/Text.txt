@@ -1,0 +1,2 @@
+Find me in \bin\Debug\net6.0
+

@@ -9,26 +9,56 @@ namespace CMP1903M_Assessment_1_Base_Code
     public class Input
     {
         //Handles the text input for Assessment 1
-        string text = "nothing";
-        
+
         //Method: manualTextInput
         //Arguments: none
         //Returns: string
         //Gets text input from the keyboard
-        public string manualTextInput()
+        public static void manualTextInput(string Manual)
         {
 
-            return text;
-        }
+            Console.WriteLine("\nIs this correct: {0} Y/N: ", Manual);
+            var isCorrect = Console.ReadLine();
+            isCorrect = isCorrect.ToUpper(); 
+            if (isCorrect == "Y")
+            {
+                Console.WriteLine("\nYou entered Yes\n");
+                Analyse.Analysis(Manual);
+            }
+            else if (isCorrect == "N")
+            {
+                Console.WriteLine("\nYou entered No\n");
+                Program.Main();
+            }
+            else if (isCorrect != "N" || isCorrect != "Y")
+            {
+                Console.WriteLine("\nNot correct");
+                Program.Main();
+            }
+        }   
 
         //Method: fileTextInput
         //Arguments: string (the file path)
         //Returns: string
         //Gets text input from a .txt file
-        public string fileTextInput(string fileName)
+        public static void fileTextInput(string File)
         {
-
-            return text;
+            
+            Console.WriteLine("Is this correct: {0}Y/N: ", File);
+            var isCorrect = Console.ReadLine();
+            isCorrect = isCorrect.ToUpper(); 
+            if (isCorrect == "Y")
+            {
+                Console.WriteLine("\nYou entered Yes\n");
+                Analyse.Analysis(File);
+            }
+            else if (isCorrect == "N")
+            {
+                Console.WriteLine("\nYou entered No\n");
+                Program.Main();
+            }
+            
+            
         }
 
     }
