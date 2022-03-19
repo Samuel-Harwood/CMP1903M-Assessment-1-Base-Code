@@ -14,7 +14,7 @@ namespace CMP1903M_Assessment_1_Base_Code
         //Arguments: none
         //Returns: string
         //Gets text input from the keyboard
-        public static void manualTextInput(string Manual)
+        public static void ManualTextInput(string Manual)
         {
 
             Console.WriteLine("\nIs this correct: {0} Y/N: ", Manual);
@@ -41,7 +41,7 @@ namespace CMP1903M_Assessment_1_Base_Code
         //Arguments: string (the file path)
         //Returns: string
         //Gets text input from a .txt file
-        public static void fileTextInput(string File)
+        public static void FileTextInput(string File)
         {
             
             Console.WriteLine("Is this correct: {0}Y/N: ", File);

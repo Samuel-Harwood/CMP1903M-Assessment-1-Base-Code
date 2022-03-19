@@ -29,14 +29,14 @@ namespace CMP1903M_Assessment_1_Base_Code
                 {
                     Console.WriteLine("\nWrite your text here: ");
                     string Manual = Console.ReadLine();
-                    Input.manualTextInput(Manual);
+                    Input.ManualTextInput(Manual);
 
                 }
                 
                 else if (input == "2")
                 {
                     string Text = System.IO.File.ReadAllText("Text.txt"); //You will have to change this to where you place a text file
-                    Input.fileTextInput(Text);
+                    Input.FileTextInput(Text);
 
                 }
                 else if (input != "2" || input != "1") //If input is not 1 or 2, Program resets

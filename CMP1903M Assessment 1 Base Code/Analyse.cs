@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq; 
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+
 
 namespace CMP1903M_Assessment_1_Base_Code
 {
@@ -19,6 +21,8 @@ namespace CMP1903M_Assessment_1_Base_Code
             }
             else
             {
+               
+
                 List<object> measurements = new List<object>(); //List to store our outputs
 
                 //1. Number of sentences
@@ -91,41 +95,41 @@ namespace CMP1903M_Assessment_1_Base_Code
                 }
                 measurements.Add(lowercount);
 
-              
 
                 //6. Most Common Character
-                string[] check = input.Split(",");
-                foreach (string character in check)
-                {
-                    var c = character.ToString().GroupBy(x => x)
-                        .OrderByDescending(s => s.Count())
-                        .First().Key;
-                    measurements.Add(c);
-                    //If two or more chars are the MCC, nothing is displayed
-                }
+                int[] count = new int[128]; //Possible ASCII chars (Extended ASCII uses 256), feel free to change it.
+                int maximum = 0;
+                Char result = Char.MinValue; //Char is initialised with a 0.
+                Array.Clear(count, 0, count.Length); //Zeroes out all the elements.
 
-                //7. Longest words
-                string[] longest = input.Split(new[] {" "}, StringSplitOptions.None); //Creating a new string array of split words
-                string word = "";
-                int max = 0;
-                foreach (String len in longest)
+                foreach( Char c in input)
                 {
-                    if(len.Length > max)
+                    if (c != ' ' && ++count[c] > maximum) //If total count > maximum and not a null value.
                     {
-                        word = len;
-                        max = len.Length;
-                    }
-                }
-                measurements.Add(word);
+                        maximum = count[c];
+                        result = c;
+                        //If Two or more characters appear the same amount, the first alphabetically will display.
 
-                //8. All words > 7 characters long, saved to .txt file.
+                    }
+                   
+                }
+                measurements.Add(result);
+          
+
+
+                //7. All words > 7 characters long, saved to .txt file.
+                input = Regex.Replace(input, @"[^\w\d\s]", ""); //Removes all punctuation, no longer counted as a letter, used for error handling.
+                string[] longest = input.Split(new[] { " " }, StringSplitOptions.None); //Creating a new string array of split words
                 string longword = "";
+                int max = 0;
                 List<string> longwords = new List<string>();
 
                 foreach (String seven in longest)
                 {
+                    
                     if (seven.Length >= 7)
                     {
+                        
                         longword = seven;
                         max = seven.Length;
                         longwords.Add(longword);
@@ -133,11 +137,12 @@ namespace CMP1903M_Assessment_1_Base_Code
                     }
                     
                 }
-                Console.WriteLine("Words > 7 chars sent to /bin/Debug/net6.0/Longwords.txt\n");
-                System.IO.File.WriteAllLines("Longwords.txt", longwords);
+                Console.WriteLine("Words >= 7 chars long are sent to /bin/Debug/net6.0/Longwords.txt\n");
+                System.IO.File.WriteAllLines("Longwords.txt", longwords); //Creates Longwords.txt, sent to /bin/Debug/net6.0/
 
 
-                //9. Send our list of ints and strings to Report
+
+                //8. Send our list of ints and strings to Report
                 Report.Reports(measurements);
             }
         
