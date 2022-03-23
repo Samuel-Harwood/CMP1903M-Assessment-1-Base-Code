@@ -1,5 +1,0 @@
-C:\Users\samue\Documents\School Work\OOP\CMP1903M Assessment 1 Base Code\CMP1903M Assessment 1 Base Code\CMP1903M Assessment 1 Base Code\obj\Debug\net5.0\CMP1903M Assessment 1 Base Code.csproj.AssemblyReference.cache
-C:\Users\samue\Documents\School Work\OOP\CMP1903M Assessment 1 Base Code\CMP1903M Assessment 1 Base Code\CMP1903M Assessment 1 Base Code\obj\Debug\net5.0\CMP1903M Assessment 1 Base Code.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\samue\Documents\School Work\OOP\CMP1903M Assessment 1 Base Code\CMP1903M Assessment 1 Base Code\CMP1903M Assessment 1 Base Code\obj\Debug\net5.0\CMP1903M Assessment 1 Base Code.AssemblyInfoInputs.cache
-C:\Users\samue\Documents\School Work\OOP\CMP1903M Assessment 1 Base Code\CMP1903M Assessment 1 Base Code\CMP1903M Assessment 1 Base Code\obj\Debug\net5.0\CMP1903M Assessment 1 Base Code.AssemblyInfo.cs
-C:\Users\samue\Documents\School Work\OOP\CMP1903M Assessment 1 Base Code\CMP1903M Assessment 1 Base Code\CMP1903M Assessment 1 Base Code\obj\Debug\net5.0\CMP1903M Assessment 1 Base Code.csproj.CoreCompileInputs.cache
