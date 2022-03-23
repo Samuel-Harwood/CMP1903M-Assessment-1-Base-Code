@@ -10,12 +10,18 @@ namespace CMP1903M_Assessment_1_Base_Code
 {
     public class Analyse
     {
-       
-        public static void Analysis(string input) //Our text file or user input
+        private List<object> _measurements;
+        public List<object> measurements { get { return _measurements; } }
+
+        public List<string> longwords { get { return _longwords; } }
+
+        private List<string> _longwords;
+
+        public void Analysis(Input input) //Our text file or user input
         {
 
             //0. Base Case, No input
-            if (input == "")
+            if (input.input == "")
             {
                 Console.WriteLine("No input found"); //Error Handling
             }
@@ -29,7 +35,7 @@ namespace CMP1903M_Assessment_1_Base_Code
                 //Calculates sentences by the amount of full stops
                 int sentence = 0;
                 char fullstop = char.Parse(".");
-                foreach (char c in input)
+                foreach (char c in input.input)
                 {
                     if (c == fullstop)
                     {
@@ -43,9 +49,9 @@ namespace CMP1903M_Assessment_1_Base_Code
 
                 //2. Number of vowels
                 int vowelcount = 0;
-                for (int i = 0; i < input.Length; i++)
+                for (int i = 0; i < input.input.Length; i++)
                 {
-                    string vowel = input[i].ToString();
+                    string vowel = input.input[i].ToString();
                     if ("aeiou".Contains(vowel)) //Weirdly written backwards
                     {
                         vowelcount++;
@@ -57,9 +63,9 @@ namespace CMP1903M_Assessment_1_Base_Code
 
                 //3. Number of consonants
                 int consonantcount = 0;
-                for (int i = 0; i < input.Length; i++)
+                for (int i = 0; i < input.input.Length; i++)
                 {
-                    string consonant = input[i].ToString();
+                    string consonant = input.input[i].ToString();
                     if ("bcdfghjklmnpqrstvwxyz".Contains(consonant)) //If consonant is found
                     {
                         consonantcount++;
@@ -71,9 +77,9 @@ namespace CMP1903M_Assessment_1_Base_Code
 
                 //4. Number of upper case letters
                 int uppercount = 0;
-                for (int i = 0; i < input.Length; i++)
+                for (int i = 0; i < input.input.Length; i++)
                 {
-                    string upper = input[i].ToString();
+                    string upper = input.input[i].ToString();
                     if ("ABCDEFGHIJKLMNOPQRSTUVWXYZ".Contains(upper)) //If upper case letter is found
                     {
                         uppercount++;
@@ -85,9 +91,9 @@ namespace CMP1903M_Assessment_1_Base_Code
 
                 //5. Number of lower case letters
                 int lowercount = 0;
-                for (int i = 0; i < input.Length; i++)
+                for (int i = 0; i < input.input.Length; i++)
                 {
-                    string lower = input[i].ToString();
+                    string lower = input.input[i].ToString();
                     if ("abcdefghijklmnopqrstuvwxyz".Contains(lower)) //If lower case letter is found
                     {
                         lowercount++;
@@ -102,7 +108,7 @@ namespace CMP1903M_Assessment_1_Base_Code
                 Char result = Char.MinValue; //Char is initialised with a 0.
                 Array.Clear(count, 0, count.Length); //Zeroes out all the elements.
 
-                foreach( Char c in input)
+                foreach( Char c in input.input)
                 {
                     if (c != ' ' && ++count[c] > maximum) //If total count > maximum and not a null value.
                     {
@@ -118,11 +124,10 @@ namespace CMP1903M_Assessment_1_Base_Code
 
 
                 //7. All words > 7 characters long, saved to .txt file.
-                input = Regex.Replace(input, @"[^\w\d\s]", ""); //Removes all punctuation, no longer counted as a letter, used for error handling.
-                string[] longest = input.Split(new[] { " " }, StringSplitOptions.None); //Creating a new string array of split words
+                var input_regex = Regex.Replace(input.input, @"[^\w\d\s]", ""); //Removes all punctuation, no longer counted as a letter, used for error handling.
+                string[] longest = input_regex.Split(new[] { " " }, StringSplitOptions.None); //Creating a new string array of split words
                 string longword = "";
                 int max = 0;
-                List<string> longwords = new List<string>();
 
                 foreach (String seven in longest)
                 {
@@ -132,18 +137,11 @@ namespace CMP1903M_Assessment_1_Base_Code
                         
                         longword = seven;
                         max = seven.Length;
-                        longwords.Add(longword);
+                        _longwords.Add(longword);
                        
                     }
                     
                 }
-                Console.WriteLine("Words >= 7 chars long are sent to /bin/Debug/net6.0/Longwords.txt\n");
-                System.IO.File.WriteAllLines("Longwords.txt", longwords); //Creates Longwords.txt, sent to /bin/Debug/net6.0/
-
-
-
-                //8. Send our list of ints and strings to Report
-                Report.Reports(measurements);
             }
         
 

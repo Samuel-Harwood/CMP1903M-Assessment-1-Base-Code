@@ -8,8 +8,8 @@ namespace CMP1903M_Assessment_1_Base_Code
 {
     public class Input
     {
-        private string _input;
-        public string input { get { return _input; } }
+        private string? _input;
+        public string input { get { return (string)input; } }
         //Handles the text input for Assessment 1
 
         //Method: manualTextInput

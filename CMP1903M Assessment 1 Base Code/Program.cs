@@ -18,8 +18,9 @@ namespace CMP1903M_Assessment_1_Base_Code
     {
         internal static void Main()
         {
-            // create input object
+            // create analysis and input output objects
             var input = new Input();
+            var analysis = new Analyse();
 
 
             //Create 'Input' object
@@ -54,6 +55,8 @@ namespace CMP1903M_Assessment_1_Base_Code
                             }
                         }
                     }
+
+                    analysis.Analysis(input);
 
                     break;
                 }
@@ -91,6 +94,8 @@ namespace CMP1903M_Assessment_1_Base_Code
 
                     input.FileTextInput(file_path);
 
+                    analysis.Analysis(input);
+
                     break;
                 }
                 else if (input_mode != "2" || input_mode != "1") //If input is not 1 or 2, Program resets
@@ -98,6 +103,8 @@ namespace CMP1903M_Assessment_1_Base_Code
                     Console.WriteLine("Invalid input, please try again: ");
                 }
             }
+
+            Report.ReportLongWords(analysis);
         }
     }
 }
