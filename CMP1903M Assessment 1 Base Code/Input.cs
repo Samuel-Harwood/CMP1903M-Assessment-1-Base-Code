@@ -8,56 +8,71 @@ namespace CMP1903M_Assessment_1_Base_Code
 {
     public class Input
     {
+        private string _input;
+        public string input { get { return _input; } }
         //Handles the text input for Assessment 1
 
         //Method: manualTextInput
         //Arguments: none
-        //Returns: string
+        //Returns: bool (if success or not)
         //Gets text input from the keyboard
-        public static void ManualTextInput(string Manual)
+        public bool ManualTextInput(string manual)
         {
+            Console.WriteLine("Is this correct: {0}Y/N: ", manual);
+            string? is_correct;
 
-            Console.WriteLine("\nIs this correct: {0} Y/N: ", Manual);
-            var isCorrect = Console.ReadLine();
-            isCorrect = isCorrect.ToUpper(); 
-            if (isCorrect == "Y")
+            while (true)
             {
-                Console.WriteLine("\nYou entered Yes\n");
-                Analyse.Analysis(Manual);
-            }
-            else if (isCorrect == "N")
-            {
-                Console.WriteLine("\nYou entered No\n");
-                Program.Main();
-            }
-            else if (isCorrect != "N" || isCorrect != "Y")
-            {
-                Console.WriteLine("\nNot correct");
-                Program.Main();
+                is_correct = Console.ReadLine();
+
+                if (is_correct == null)
+                {
+                    Console.WriteLine("Input is invalid, please try again: ");
+                }
+                else if (is_correct == "Y")
+                {
+                    Console.WriteLine("\nYou entered Yes\n");
+                    _input = manual;
+                    return true;
+                }
+                else if (is_correct == "N")
+                {
+                    Console.WriteLine("\nYou entered No");
+                    return false;
+                }
             }
         }   
 
         //Method: fileTextInput
         //Arguments: string (the file path)
-        //Returns: string
+        //Returns: bool (if its a success or not)
         //Gets text input from a .txt file
-        public static void FileTextInput(string File)
+        public bool FileTextInput(string path)
         {
-            
-            Console.WriteLine("Is this correct: {0}Y/N: ", File);
-            var isCorrect = Console.ReadLine();
-            isCorrect = isCorrect.ToUpper(); 
-            if (isCorrect == "Y")
+            var file = File.ReadAllText(path);
+
+            Console.WriteLine("Is this correct: {0}Y/N: ", file);
+            string? is_correct;
+
+            while (true)
             {
-                Console.WriteLine("\nYou entered Yes\n");
-                Analyse.Analysis(File);
+                is_correct = Console.ReadLine();
+
+                if (is_correct == null)
+                {
+                    Console.WriteLine("Input is invalid, please try again: ");
+                } else if (is_correct == "Y")
+                {
+                    Console.WriteLine("\nYou entered Yes\n");
+                    _input = file;
+                    return true;
+                }
+                else if (is_correct == "N")
+                {
+                    Console.WriteLine("\nYou entered No");
+                    return false;
+                }
             }
-            else if (isCorrect == "N")
-            {
-                Console.WriteLine("\nYou entered No\n");
-                Program.Main();
-            }
-            
             
         }
 
