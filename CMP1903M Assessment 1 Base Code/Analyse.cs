@@ -30,13 +30,13 @@ namespace CMP1903M_Assessment_1_Base_Code
                     //1. Number of sentences
                     //Calculates sentences by the amount of full stops
                     int sentence = 0;
-                    char fullstop = char.Parse(".");
-                    foreach (char c in input)
+                  
+                    for (int i = 0; i < input.Length; i++)
                     {
-                        if (c == fullstop)
+                        string sentences = input[i].ToString();
+                        if (".?!".Contains(sentences)) //Weirdly written backwards
                         {
                             sentence++;
-
                         }
                     }
                     Measurements.Add("sentence", sentence);
@@ -134,7 +134,6 @@ namespace CMP1903M_Assessment_1_Base_Code
                         {
 
                             string longword = seven;
-                            int max = seven.Length;
                             longwords.Add(longword);
 
                         }
