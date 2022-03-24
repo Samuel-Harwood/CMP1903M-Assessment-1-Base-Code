@@ -8,58 +8,58 @@ namespace CMP1903M_Assessment_1_Base_Code
 {
     public class Input
     {
-        //Handles the text input for Assessment 1
+       
 
-        //Method: manualTextInput
-        //Arguments: none
-        //Returns: string
-        //Gets text input from the keyboard
-        public static void ManualTextInput(string Manual)
+        public void ManualTextInput(string Manual) //Non-Static Method
         {
+            var analysis = new Analyse(); //Analysis objects
 
             Console.WriteLine("\nIs this correct: {0} Y/N: ", Manual);
-            var isCorrect = Console.ReadLine();
-            isCorrect = isCorrect.ToUpper(); 
-            if (isCorrect == "Y")
+            string? isCorrect = Console.ReadLine()?? string.Empty; //fallback value of null
+            isCorrect = isCorrect.ToUpper(); //Could be performed on the line above but lead to Warning CS8602
+            switch (isCorrect)
             {
-                Console.WriteLine("\nYou entered Yes\n");
-                Analyse.Analysis(Manual);
-            }
-            else if (isCorrect == "N")
-            {
-                Console.WriteLine("\nYou entered No\n");
-                Program.Main();
-            }
-            else if (isCorrect != "N" || isCorrect != "Y")
-            {
-                Console.WriteLine("\nNot correct");
-                Program.Main();
-            }
-        }   
+                case "Y":
+                    Console.WriteLine("\nYou entered Yes\n");
+                    analysis.Analysis(Manual);
+                    break;
 
-        //Method: fileTextInput
-        //Arguments: string (the file path)
-        //Returns: string
-        //Gets text input from a .txt file
-        public static void FileTextInput(string File)
-        {
-            
-            Console.WriteLine("Is this correct: {0}Y/N: ", File);
-            var isCorrect = Console.ReadLine();
-            isCorrect = isCorrect.ToUpper(); 
-            if (isCorrect == "Y")
-            {
-                Console.WriteLine("\nYou entered Yes\n");
-                Analyse.Analysis(File);
+                case "N":
+                    Console.WriteLine("\nYou entered No\n");
+                    Program.Main();
+                    break;
+
+                default:
+                    Console.WriteLine("\nNot correct");
+                    Program.Main();
+                    break;
             }
-            else if (isCorrect == "N")
-            {
-                Console.WriteLine("\nYou entered No\n");
-                Program.Main();
-            }
-            
-            
         }
 
+        public void FileTextInput(string File) //Non-Static Method
+        {
+            var analysis = new Analyse(); //Analysis objects
+
+            Console.WriteLine("Is this correct: {0}Y/N: ", File);
+            string? isCorrect = Console.ReadLine() ?? string.Empty; //fallback value of null
+            isCorrect = isCorrect.ToUpper(); //Could be performed on the line above but lead to Warning CS8602
+            switch (isCorrect)
+            {
+                case "Y":
+                    Console.WriteLine("\nYou entered Yes\n");
+                    analysis.Analysis(File);
+                    break;
+
+                case "N":
+                    Console.WriteLine("\nYou entered No\n");
+                    Program.Main(); //Resets user
+                    break;
+
+                default: //!= (Y || N)
+                    Console.WriteLine("\nNot a valid option");
+                    Program.Main();
+                    break;
+            }
+        }
     }
 }

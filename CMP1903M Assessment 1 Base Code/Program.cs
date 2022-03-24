@@ -1,9 +1,9 @@
 ﻿//Base code project for CMP1903M Assessment 1
 /*Code traversal:
-Program.cs
-Input.cs
-Analyse.cs
-Report.cs
+Program.cs -- Handles user choice of manual or file input
+Input.cs -- Checks for valid inputs
+Analyse.cs -- Analyses input
+Report.cs -- Sends analysis of text back to the user
 */
 using System;
 using System.IO;
@@ -18,42 +18,42 @@ namespace CMP1903M_Assessment_1_Base_Code
     {
         internal static void Main()
         {
+           var input = new Input();
 
-            try
+            Console.WriteLine("1. Enter manually\n2. Enter from text file\n1 or 2: ");
+            string? key = Console.ReadLine();
+            switch (key)
             {
-                //Create 'Input' object
-                //Get either manually entered text, or text from a file
-                Console.WriteLine("1. Enter manually\n2. Enter from text file\n1 or 2: ");
-                var input = Convert.ToString(Console.ReadLine());
-                if (input == "1")
-                {
+                case "1":
                     Console.WriteLine("\nWrite your text here: ");
-                    string Manual = Console.ReadLine();
-                    Input.ManualTextInput(Manual);
+                    string? Manual = Console.ReadLine();
+                    input.ManualTextInput(Manual);
+                    break;
 
-                }
-                
-                else if (input == "2")
-                {
-                    string Text = System.IO.File.ReadAllText("Text.txt"); //You will have to change this to where you place a text file
-                    Input.FileTextInput(Text);
+                case "2":
+                    Console.WriteLine("\nEnter File path: "); //Default path = Text.txt
+                    string? check = Console.ReadLine();
+                    if (File.Exists(check))
+                    {
+                        var Text = System.IO.File.ReadAllText(check); //You will have to change this to where you place a text file
+                        input.FileTextInput(Text);
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nPath Not found\n");  
+                        Main();
+                    }
+                    break;
+                    
+                    
+                    
 
-                }
-                else if (input != "2" || input != "1") //If input is not 1 or 2, Program resets
-                {
+                default:
                     Console.WriteLine("\nPlease enter 1 or 2");
-                    Program.Main();
-                }
+                    Main();
+                    break;
             }
-            catch(Exception ex) //If user creates an error, that error is sent to the console
-            {
-                Console.WriteLine(ex.ToString()); //Error Handling
-            }
-    
-           
         }
-        
-        
-    
+  
     }
 }
