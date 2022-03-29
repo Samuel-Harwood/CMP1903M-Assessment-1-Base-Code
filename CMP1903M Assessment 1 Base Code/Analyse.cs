@@ -16,7 +16,7 @@ namespace CMP1903M_Assessment_1_Base_Code
 
         public void Analysis(string input) //Non-Static Method
         {
-            var report = new Report(); //To call report later on.
+             //To call report later on.
 
             switch (input)
             {
@@ -25,12 +25,11 @@ namespace CMP1903M_Assessment_1_Base_Code
                     break; 
 
                 default:
-             
+
 
                     //1. Number of sentences
                     //Calculates sentences by the amount of full stops
                     int sentence = 0;
-                  
                     for (int i = 0; i < input.Length; i++)
                     {
                         string sentences = input[i].ToString();
@@ -47,7 +46,7 @@ namespace CMP1903M_Assessment_1_Base_Code
                     int vowelcount = 0;
                     for (int i = 0; i < input.Length; i++)
                     {
-                        string vowel = input[i].ToString();
+                        string vowel = input[i].ToString().ToLower();
                         if ("aeiou".Contains(vowel)) //Weirdly written backwards
                         {
                             vowelcount++;
@@ -61,7 +60,7 @@ namespace CMP1903M_Assessment_1_Base_Code
                     int consonantcount = 0;
                     for (int i = 0; i < input.Length; i++)
                     {
-                        string consonant = input[i].ToString();
+                        string consonant = input[i].ToString().ToLower();
                         if ("bcdfghjklmnpqrstvwxyz".Contains(consonant)) //If consonant is found
                         {
                             consonantcount++;
@@ -119,39 +118,40 @@ namespace CMP1903M_Assessment_1_Base_Code
                     //So we create a new dictionary are parse it into our report class.
                     Dictionary <string, char> mcc = new(); 
                     mcc.Add("result", result);
+                    
+                    LongCharacters(input);
+                    
 
 
-
-                    //7. All words > 7 characters long, saved to .txt file.
-                    input = Regex.Replace(input, @"[^\w\d\s]", ""); //Removes all punctuation, no longer counted as a letter, used for error handling.
-                    string[] longest = input.Split(new[] { " " }, StringSplitOptions.None); //Creating a new string array of split words
-                    List<string> longwords = new();
-
-                    foreach (String seven in longest)
-                    {
-
-                        if (seven.Length >= 7)
-                        {
-
-                            string longword = seven;
-                            longwords.Add(longword);
-
-                        }
-
-                    }
-                    System.IO.File.WriteAllLines("Longwords.txt", longwords); //Creates Longwords.txt, sent to /bin/Debug/net6.0/
-
-
-
-                    //8. Send our list of ints and strings to Report
-                    report.Reports(Measurements, mcc);
-                    break;
+                    //7. Send our list of ints and strings to Report
+                    Report.Reports(Measurements, mcc); //Report is a static method in a Abstracted class
+                    break; //End Default Switch statement
 
             }
-                
+        }
+        //8. All words > 7 characters long, saved to .txt file.
+        //LongCharacters is not sent to Report and so is a seperate method
+        private void LongCharacters(string input) //Additional method
+        {
+            //Removes all punctuation, prevents words ending in punctuation from
+            //being considered 1 char longer(incorrect additions to Longwords.txt e.g. Abacus!)
+            input = Regex.Replace(input, @"[^\w\d\s]", ""); 
+            string[] longest = input.Split(new[] { " " }, StringSplitOptions.None); //Creating a new string array of split words
+            List<string> longwords = new();
 
- 
+            foreach (String seven in longest)
+            {
 
-        }      
+                if (seven.Length >= 7)
+                {
+
+                    string longword = seven;
+                    longwords.Add(longword);
+
+                }
+
+            }
+            System.IO.File.WriteAllLines("Longwords.txt", longwords); //Creates Longwords.txt, sent to /bin/Debug/net6.0/
+        }
     }
 }

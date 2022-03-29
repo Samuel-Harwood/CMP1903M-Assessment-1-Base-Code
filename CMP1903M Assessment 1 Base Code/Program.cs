@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace CMP1903M_Assessment_1_Base_Code
 {
-    class Program
+    abstract class Program //Abstraction
     {
         internal static void Main()
         {
@@ -26,7 +26,7 @@ namespace CMP1903M_Assessment_1_Base_Code
             {
                 case "1":
                     Console.WriteLine("\nWrite your text here: ");
-                    string? Manual = Console.ReadLine();
+                    string? Manual = Console.ReadLine()?? string.Empty;
                     input.ManualTextInput(Manual);
                     break;
 

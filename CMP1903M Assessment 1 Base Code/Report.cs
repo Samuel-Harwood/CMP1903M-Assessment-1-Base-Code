@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace CMP1903M_Assessment_1_Base_Code
 {
-    class Report
+    abstract class Report //Abstraction
     {
         
-        public void Reports(Dictionary <string,int> measurements,Dictionary <string,char>MCC) //Non-Static Method        
+        public static void Reports(Dictionary <string,int> measurements,Dictionary <string,char>MCC) //Static Method        
         {
             var m = measurements;
             var mcc = MCC;

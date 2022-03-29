@@ -8,10 +8,14 @@ namespace CMP1903M_Assessment_1_Base_Code
 {
     public class Input
     {
-       
 
+        private string? _manual; //READ-ONLY (Encapsulation)
+        public string? Manual { get { return _manual; } }
+
+       
         public void ManualTextInput(string Manual) //Non-Static Method
         {
+           
             var analysis = new Analyse(); //Analysis objects
 
             Console.WriteLine("\nIs this correct: {0} Y/N: ", Manual);
